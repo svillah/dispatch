@@ -91,10 +91,26 @@
           </div>
         </div>
       </div>
+      <div class="row" ng-controller="PanelController as panel">
+        <div class="span12">
+          <ul class="nav nav-tabs nav-justified">
+            <li ng-class="{ active: panel.isSelected(1) }">
+              <a href="https://dispatchissuereporting.herokuapp.com/" ng-click="panel.selectTab(1)">Home</a>
+            </li>
+            <li ng-class="{ active: panel.isSelected(2) }">
+              <a href ng-click="panel.selectTab(2)">Specifications</a>
+            </li>
+            <li ng-class="{ active: panel.isSelected(3) }">
+              <a href ng-click="panel.selectTab(3)">Reviews</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/angular.min.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>
