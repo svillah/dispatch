@@ -27,7 +27,7 @@
         </div>
       </div>
     <div class="page-header">
-      <h2>Air Canada
+      <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
         <em class="pull-right">Dispatch Reporting Tool</em>
       </h2>
 
@@ -54,56 +54,67 @@
             <div class="panel" ng-show="panel.isSelected(2)">
               <form name="createForm" ng-controller="CreateReportController as createRpt"
                                       ng-submit="createForm.$valid && createRpt.addReport(document)" novalidate>
-                <blockquote>
-                  <h3><b>Overview: {{createRpt.dispatcherReport.issueOverview}}</b></h3>
-                  Additional Notes:{{createRpt.dispatcherReport.submissionNotes}} <br>
-                  Status: {{createRpt.dispatcherReport.status}} <br>
-                  <cite>— {{createRpt.dispatcherReport.employeeID}} on {{createRpt.dispatcherReport.createdOn | date}}</cite>
-                </blockquote>
-
-                <h4>Create a Report</h4>
-                <fieldset class="form-group">
-                  <input class="span11" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="EmployeeID" title="employeeID" required/>
-                </fieldset><br>
-                <fieldset class="form-group">
-                  <textarea class="span11" ng-model="createRpt.dispatcherReport.issueOverview" class="form-control" placeholder="Issue Overview" title="Issue" required></textarea>
-                </fieldset>
-                <fieldset class="form-group">
-                  <textarea class="span11" ng-model="createRpt.dispatcherReport.submissionNotes" class="form-control" placeholder="Submission Notes" title="SubmissionNotes" required></textarea>
-                </fieldset>
-                <fieldset class="form-group">
-                  <select class="span11" ng-model="createRpt.dispatcherReport.software" class="form-control" ng-options="softwares for softwares in ['Google Chrome', 'Sharepoint', 'Microsoft Access']"  title="Software" required>
-                    <option value="">Affected Software</option>
-                  </select>
-                </fieldset>
-                <fieldset class="form-group">
-                  <select class="span11" ng-model="createRpt.dispatcherReport.status" class="form-control" ng-options="ratings for ratings in ['Unresolved', 'In Progress', 'Resolved']"  title="Status" required>
-                    <option value="">Status</option>
-                  </select>
-                </fieldset><br><br>
-                <fieldset class="form-group">
-                  <textarea class="span11" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
-                </fieldset>
-                <fieldset class="form-group">
-                  <select class="span11" ng-model="createRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority">
-                    <option value="">Priority Level</option>
-                  </select>
-                </fieldset><br>
-                <fieldset class="form-group">
-                  <input type="submit" class="btn btn-info span11" value="Submit report" />
-                </fieldset>
+                <div class="row">
+                  <div class="span6" style="border: solid 1px grey">
+                    <blockquote>
+                      <h3>Create a Report</h3>
+                      <fieldset class="form-group">
+                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="EmployeeID" title="employeeID" required/>
+                      </fieldset><br>
+                      <fieldset class="form-group">
+                        <textarea class="span5" ng-model="createRpt.dispatcherReport.issueOverview" class="form-control" placeholder="Issue Overview" title="Issue" required></textarea>
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <textarea class="span5" ng-model="createRpt.dispatcherReport.submissionNotes" class="form-control" placeholder="Submission Notes" title="SubmissionNotes" required></textarea>
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <select class="span5" ng-model="createRpt.dispatcherReport.software" class="form-control" ng-options="softwares for softwares in ['Google Chrome', 'Sharepoint', 'Microsoft Access']"  title="Software" required>
+                          <option value="">Affected Software</option>
+                        </select>
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <select class="span5" ng-model="createRpt.dispatcherReport.status" class="form-control" ng-options="ratings for ratings in ['Unresolved', 'In Progress', 'Resolved']"  title="Status" required>
+                          <option value="">Status</option>
+                        </select>
+                      </fieldset><br><br>
+                      <fieldset class="form-group">
+                        <textarea class="span5" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <select class="span5" ng-model="createRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority">
+                          <option value="">Priority Level</option>
+                        </select>
+                      </fieldset><br>
+                      <fieldset class="form-group">
+                        <input type="submit" class="btn btn-info span5" value="Submit report" />
+                      </fieldset>
+                  </blockquote>
+                  </div>
+                  <div class="span5" style="border: solid 1px gray">
+                    <blockquote>
+                      <h3><b>Report Instance</b></h3>
+                      <section>
+                        <h4>Issue: {{createRpt.dispatcherReport.issueOverview}}</h4>
+                        Notes: {{createRpt.dispatcherReport.submissionNotes}} <br>
+                        Affected Software: {{createRpt.dispatcherReport.software}} <br>
+                        Status: {{createRpt.dispatcherReport.status}} <br>
+                        <cite>— <i>{{createRpt.dispatcherReport.employeeID}}</i> on {{createRpt.dispatcherReport.createdOn | date}}</cite>
+                    </section>
+                    </blockquote>
+                  </div>
+                </div>
               </form>
             </div>
             <div class="panel" ng-show="panel.isSelected(3)">
               <h3>List of Reports</h3><br>
               <blockquote ng-repeat="dispatcherReport in document.dispatcherReports">
-                <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b></h4>
-                {{dispatcherReport.submissionNotes}} <br>
-                Affected Software: {{dispatcherReport.software}}
-                Status: {{dispatcherReport.status}} <br>
-                {{dispatcherReport.responderNotes}}
-                Priority: {{dispatcherReport.priority}} <br>
-                <cite>— {{dispatcherReport.employeeID}} on {{dispatcherReport.createdOn | date}}</cite>
+                  <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
+                  {{dispatcherReport.submissionNotes}} <br>
+                  Affected Software: {{dispatcherReport.software}}
+                  Status: {{dispatcherReport.status}} <br>
+                  {{dispatcherReport.responderNotes}}
+                  Priority: {{dispatcherReport.priority}} <br>
+                  <cite>— {{dispatcherReport.employeeID}} on {{dispatcherReport.createdOn | date}}</cite>
               </blockquote>
             </div>
           </section>

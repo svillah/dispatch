@@ -2,7 +2,7 @@
   var app = angular.module('tool', [ ]);
 
   app.controller("PanelController", function(){
-    this.tab = 2;
+    this.tab = 1;
     this.selectTab = function(setTab) {
       this.tab = setTab;
     };
