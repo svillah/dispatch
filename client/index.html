@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="tool">
   <head>
-    <title>Dispatch</title>
+    <title>Air Canada - Dispatch</title>
+    <link rel="icon" type="image/png" href="logo.png" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
@@ -17,6 +18,7 @@
     </style>
   </head>
 
+<!-- Header and Angularjs ref -->
   <body ng-controller="ToolController as tool">
     <div class="container">
       <div class="navbar navbar-fixed-top navbar-inverse">
@@ -26,6 +28,7 @@
           </div>
         </div>
       </div>
+    <!-- Air Canada titles -->
     <div class="page-header">
       <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
         <em class="pull-right">Dispatch Reporting Tool</em>
@@ -35,6 +38,7 @@
     <div class="list-group">
       <div class="list-group-item" ng-repeat="document in tool.documents">
           <section ng-controller="PanelController as panel" style="padding-top:15px">
+            <!-- Tab implementation -->
             <ul class="nav nav-tabs nav-justified">
               <li ng-class="{ active: panel.isSelected(1) }">
                 <a href ng-click="panel.selectTab(1)">Dashboard</a>
@@ -48,18 +52,22 @@
             </ul>
 
             <div class="panel" ng-show="panel.isSelected(1)">
+              <!-- 1st tab information section -->
               <h4>Hello and welcome!</h4>
               <blockquote>You can either create a report or view one.</blockquote>
             </div>
+
+            <!-- 2nd tab form -->
             <div class="panel" ng-show="panel.isSelected(2)">
               <form name="createForm" ng-controller="CreateReportController as createRpt"
                                       ng-submit="createForm.$valid && createRpt.addReport(document)" novalidate>
                 <div class="row">
-                  <div class="span6" style="border: solid 1px grey">
+                  <div class="span6" style="border: solid 1px #a8a8a8">
                     <blockquote>
                       <h3>Create a Report</h3>
-                      <fieldset class="form-group">
-                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="EmployeeID" title="employeeID" required/>
+                      <!-- Dispatcher section -->
+                      <fieldset class="form-group">Employee ID<br>
+                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="20598728" title="employeeID" required/>
                       </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.issueOverview" class="form-control" placeholder="Issue Overview" title="Issue" required></textarea>
@@ -77,6 +85,10 @@
                           <option value="">Status</option>
                         </select>
                       </fieldset><br><br>
+                      <!-- Responder section -->
+                      <fieldset class="form-group">Employee ID<br>
+                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="20598728" title="employeeID" required/>
+                      </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
                       </fieldset>
@@ -86,11 +98,12 @@
                         </select>
                       </fieldset><br>
                       <fieldset class="form-group">
-                        <input type="submit" class="btn btn-info span5" value="Submit report" />
+                        <input type="submit" class="btn btn-inverse span5" value="Submit report" />
                       </fieldset>
                   </blockquote>
                   </div>
-                  <div class="span5" style="border: solid 1px gray">
+                  <div class="span5" style="border: solid 1px #a8a8a8">
+                    <!-- 2nd tab Sample Report -->
                     <blockquote>
                       <h3><b>Report Instance</b></h3>
                       <section>
@@ -105,16 +118,17 @@
                 </div>
               </form>
             </div>
+            <!-- Third tab: report list -->
             <div class="panel" ng-show="panel.isSelected(3)">
               <h3>List of Reports</h3><br>
               <blockquote ng-repeat="dispatcherReport in document.dispatcherReports">
-                  <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
-                  {{dispatcherReport.submissionNotes}} <br>
-                  Affected Software: {{dispatcherReport.software}}
-                  Status: {{dispatcherReport.status}} <br>
-                  {{dispatcherReport.responderNotes}}
-                  Priority: {{dispatcherReport.priority}} <br>
-                  <cite>— {{dispatcherReport.employeeID}} on {{dispatcherReport.createdOn | date}}</cite>
+                <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
+                {{dispatcherReport.submissionNotes}} <br>
+                Affected Software: {{dispatcherReport.software}}
+                Status: {{dispatcherReport.status}} <br>
+                {{dispatcherReport.responderNotes}}
+                Priority: {{dispatcherReport.priority}} <br>
+                <cite>— {{dispatcherReport.employeeID}} on {{dispatcherReport.createdOn | date}}</cite>
               </blockquote>
             </div>
           </section>
