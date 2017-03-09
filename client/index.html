@@ -66,8 +66,8 @@
                     <blockquote>
                       <h3>Create a Report</h3>
                       <!-- Dispatcher section -->
-                      <fieldset class="form-group">Employee ID<br>
-                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="20598728" title="employeeID" required/>
+                      <fieldset class="form-group">EmployeeID<br>
+                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="205H87R8" title="employeeID" required/>
                       </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.issueOverview" class="form-control" placeholder="Issue Overview" title="Issue" required></textarea>
@@ -85,9 +85,9 @@
                           <option value="">Status</option>
                         </select>
                       </fieldset><br><br>
-                      <!-- Responder section -->
-                      <fieldset class="form-group">Employee ID<br>
-                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="20598728" title="employeeID" required/>
+                      <!-- Responder section, figure out if we should implement Update Report tab-->
+                      <fieldset class="form-group">Responder EmployeeID<br>
+                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="10598B2A" title="employeeID" required/>
                       </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
@@ -124,11 +124,10 @@
               <blockquote ng-repeat="dispatcherReport in document.dispatcherReports">
                 <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
                 {{dispatcherReport.submissionNotes}} <br>
-                Affected Software: {{dispatcherReport.software}}
-                Status: {{dispatcherReport.status}} <br>
+                Affected Software: {{dispatcherReport.software}} <br>
                 {{dispatcherReport.responderNotes}}
                 Priority: {{dispatcherReport.priority}} <br>
-                <cite>— {{dispatcherReport.employeeID}} on {{dispatcherReport.createdOn | date}}</cite>
+                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}}</cite>
               </blockquote>
             </div>
           </section>
