@@ -31,7 +31,7 @@
     <!-- Air Canada titles -->
     <div class="page-header">
       <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
-        <em class="pull-right">Dispatch Reporting Tool</em>
+        <em class="pull-right">Reporting Tool</em>
       </h2>
 
     </div>
@@ -87,7 +87,7 @@
                       </fieldset><br><br>
                       <!-- Responder section, figure out if we should implement Update Report tab-->
                       <fieldset class="form-group">Responder EmployeeID<br>
-                        <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="10598B2A" title="employeeID" required/>
+                        <input class="span5" ng-model="createRpt.dispatcherReport.responderID" type="string" class="form-control" placeholder="10598B2A" title="responderID" required/>
                       </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
@@ -127,7 +127,7 @@
                 Affected Software: {{dispatcherReport.software}} <br>
                 {{dispatcherReport.responderNotes}}
                 Priority: {{dispatcherReport.priority}} <br>
-                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}}</cite>
+                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(2)"">Update</button></cite><br><br>
               </blockquote>
             </div>
           </section>
