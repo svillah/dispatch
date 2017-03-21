@@ -11,33 +11,21 @@
     <!--<script src="/socket.io/socket.io.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>-->
-    <style>
-      body {
-        padding-top: 60px;
-      }
-    </style>
   </head>
 
 <!-- Header and Angularjs ref -->
   <body ng-controller="ToolController as tool">
     <div class="container">
-      <div class="navbar navbar-fixed-top navbar-inverse">
-        <div class="navbar-inner">
-          <div class="pull-right">
-            <a href="https://dispatchissuereporting.herokuapp.com/" class="brand">Home</a>
-          </div>
-        </div>
-      </div>
-    <!-- Air Canada titles -->
     <div class="page-header">
       <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
-        <em class="pull-right">Reporting Tool</em>
+        <em class="pull-right"> <a style="color:#000" href="https://dispatchissuereporting.herokuapp.com/">Reporting Tool</a></em>
+        <img style="width:100%; padding:10px 0px 0px 0px" src="img/ac.jpg"/>
       </h2>
 
     </div>
     <div class="list-group">
       <div class="list-group-item" ng-repeat="document in tool.documents">
-          <section ng-controller="PanelController as panel" style="padding-top:15px">
+          <section ng-controller="PanelController as panel" style="padding-top:10px">
             <!-- Tab implementation -->
             <ul class="nav nav-tabs nav-justified">
               <li ng-class="{ active: panel.isSelected(1) }">
@@ -53,8 +41,16 @@
 
             <div class="panel" ng-show="panel.isSelected(1)">
               <!-- 1st tab information section -->
-              <h4>Hello and welcome!</h4>
+              <h2>Hello and welcome!</h2>
               <blockquote>You can either create a report or view one.</blockquote>
+                <blockquote style="margin-top:20px">
+                <h4><b>Helpful Resources</b></h4>
+                  <section>
+                    <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/onboard/fleet.html"><button class="btn btn-danger" type="button">Fleet List</button></a>
+                    <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/flight-information/daily-travel-outlook.html"><button class="btn btn-danger" type="button">Daily Travel Outlook</button></a>
+                    <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/flight-information/flight-status-results.html"><button class="btn btn-danger" type="button">Flight Status</button></a>
+                  </section>
+                </blockquote>
             </div>
 
             <!-- 2nd tab form -->
@@ -62,7 +58,7 @@
               <form name="createForm" ng-controller="CreateReportController as createRpt"
                                       ng-submit="createForm.$valid && createRpt.addReport(document)" novalidate>
                 <div class="row">
-                  <div class="span6" style="border: solid 1px #a8a8a8">
+                  <div class="span6">
                     <blockquote>
                       <h3>Create a Report</h3>
                       <!-- Dispatcher section -->
@@ -102,7 +98,7 @@
                       </fieldset>
                   </blockquote>
                   </div>
-                  <div class="span5" style="border: solid 1px #a8a8a8">
+                  <div class="span5" style="margin-bottom: 30px">
                     <!-- 2nd tab Sample Report -->
                     <blockquote>
                       <h3><b>Report Instance</b></h3>
