@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/mystyles.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <!--<script src="/socket.io/socket.io.js"></script>
@@ -16,34 +17,36 @@
 <!-- Header and Angularjs ref -->
   <body ng-controller="ToolController as tool">
     <div class="container">
-    <div class="page-header">
-      <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
-        <em class="pull-right"> <a style="color:#000" href="https://dispatchissuereporting.herokuapp.com/">Reporting Tool</a></em>
-        <img style="width:100%; padding:10px 0px 0px 0px" src="img/ac.jpg"/>
-      </h2>
+      <div class="page-header">
+        <h2><a style="color:#D8292F" href="https://www.aircanada.com/ca/en/aco/home.html"> Air Canada <i class="icon-globe"></i></a>
+          <em class="pull-right"> <a style="color:#000" href="https://dispatchissuereporting.herokuapp.com/">Reporting Tool</a></em>
+          <img style="width:100%; padding:10px 0px 0px 0px" src="img/ac.jpg"/>
+        </h2>
+      </div>
+      <div class="list-group">
+        <div class="list-group-item" ng-repeat="document in tool.documents">
+            <section ng-controller="PanelController as panel" style="padding-top:10px">
+              <!-- Tab implementation -->
+              <ul class="nav nav-tabs nav-justified">
+                <li ng-class="{ active: panel.isSelected(1) }">
+                  <a href ng-click="panel.selectTab(1)">Dashboard</a>
+                </li>
+                <li ng-class="{ active: panel.isSelected(2) }">
+                  <a href ng-click="panel.selectTab(2)">Create a Report</a>
+                </li>
+                <li ng-class="{ active: panel.isSelected(3) }">
+                  <a href ng-click="panel.selectTab(3)">Update a Report</a>
+                </li>
+                <li ng-class="{ active: panel.isSelected(4) }">
+                  <a href ng-click="panel.selectTab(4)">View a Report</a>
+                </li>
+              </ul>
 
-    </div>
-    <div class="list-group">
-      <div class="list-group-item" ng-repeat="document in tool.documents">
-          <section ng-controller="PanelController as panel" style="padding-top:10px">
-            <!-- Tab implementation -->
-            <ul class="nav nav-tabs nav-justified">
-              <li ng-class="{ active: panel.isSelected(1) }">
-                <a href ng-click="panel.selectTab(1)">Dashboard</a>
-              </li>
-              <li ng-class="{ active: panel.isSelected(2) }">
-                <a href ng-click="panel.selectTab(2)">Create a Report</a>
-              </li>
-              <li ng-class="{ active: panel.isSelected(3) }">
-                <a href ng-click="panel.selectTab(3)">View a Report</a>
-              </li>
-            </ul>
-
+            <!-- 1st tab: Dashboard -->
             <div class="panel" ng-show="panel.isSelected(1)">
-              <!-- 1st tab information section -->
-              <h2>Hello and welcome!</h2>
+              <h3>Hello and welcome!</h3>
               <blockquote>You can either create a report or view one.</blockquote>
-                <blockquote style="margin-top:20px">
+                <blockquote style="margin-top:20px"><br>
                 <h4><b>Helpful Resources</b></h4>
                   <section>
                     <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/onboard/fleet.html"><button class="btn btn-danger" type="button">Fleet List</button></a>
@@ -60,9 +63,8 @@
                 <div class="row">
                   <div class="span6">
                     <blockquote>
-                      <h3>Create a Report</h3>
-                      <!-- Dispatcher section -->
-                      <fieldset class="form-group">EmployeeID<br>
+                      <h3>Create a Report</h3><br>
+                      <fieldset class="form-group">Employee ID:<br>
                         <input class="span5" ng-model="createRpt.dispatcherReport.employeeID" type="string" class="form-control" placeholder="205H87R8" title="employeeID" required/>
                       </fieldset><br>
                       <fieldset class="form-group">
@@ -81,27 +83,16 @@
                           <option value="">Status</option>
                         </select>
                       </fieldset><br><br>
-                      <!-- Responder section, figure out if we should implement Update Report tab-->
-                      <fieldset class="form-group">Responder EmployeeID<br>
-                        <input class="span5" ng-model="createRpt.dispatcherReport.responderID" type="string" class="form-control" placeholder="10598B2A" title="responderID" required/>
-                      </fieldset><br>
-                      <fieldset class="form-group">
-                        <textarea class="span5" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
-                      </fieldset>
-                      <fieldset class="form-group">
-                        <select class="span5" ng-model="createRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority">
-                          <option value="">Priority Level</option>
-                        </select>
-                      </fieldset><br>
                       <fieldset class="form-group">
                         <input type="submit" class="btn btn-inverse span5" value="Submit report" />
                       </fieldset>
                   </blockquote>
                   </div>
                   <div class="span5" style="margin-bottom: 30px">
+
                     <!-- 2nd tab Sample Report -->
                     <blockquote>
-                      <h3><b>Report Instance</b></h3>
+                      <h3><b>Report Instance</b></h3><br>
                       <section>
                         <h4>Issue: {{createRpt.dispatcherReport.issueOverview}}</h4>
                         Notes: {{createRpt.dispatcherReport.submissionNotes}} <br>
@@ -114,8 +105,37 @@
                 </div>
               </form>
             </div>
-            <!-- Third tab: report list -->
+
+            <!--Third tab: update -->
             <div class="panel" ng-show="panel.isSelected(3)">
+              <h3>Update a Report</h3><br>
+              <div class="row-fluid">
+                <div class="span6">
+                  <div class="form-group">Report ID #:<br>
+                    <input ng-model="createRpt.dispatcherReport.reportID" class="form-control" placeholder="128793" title="Issue" integer required/>
+                  </div><br>
+                  <div class="form-group">Employee ID (Responders ONLY):
+                    <input ng-model="createRpt.dispatcherReport.responderID" type="string" class="form-control" placeholder="17SO2R89" title="responderID" required/>
+                  </div>
+                </div>
+                <div class="span6">
+                  <div class="form-group">
+                    <textarea ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
+                  </div><br>
+                  <div class="form-group">
+                    <select ng-model="createRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority" required>
+                      <option value="">Priority Level</option>
+                    </select>
+                  </div><br>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-block btn-large btn-inverse span5" value="Submit report" />
+              </div>
+            </div>
+
+            <!-- Fourth tab: report list -->
+            <div class="panel" ng-show="panel.isSelected(4)">
               <h3>List of Reports</h3><br>
               <blockquote ng-repeat="dispatcherReport in document.dispatcherReports">
                 <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
@@ -123,7 +143,7 @@
                 Affected Software: {{dispatcherReport.software}} <br>
                 {{dispatcherReport.responderNotes}}
                 Priority: {{dispatcherReport.priority}} <br>
-                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(2)"">Update</button></cite><br><br>
+                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(3)"">Update</button></cite><br><br>
               </blockquote>
             </div>
           </section>

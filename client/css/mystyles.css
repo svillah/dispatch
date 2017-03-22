@@ -1,0 +1,23 @@
+.form-control {
+  width: 100%
+}
+
+// Input groups need that 100% width though
+.input-group > .form-control {
+  width: 100%;
+}
+
+.form-group{
+    display:block;
+    clear:both;
+    width:100%;
+}
+
+.gray{
+  background-color:lightgray; !important
+}
+
+/*.nav a:hover {
+        color:#fff;
+        background:#191970;
+    }*/
