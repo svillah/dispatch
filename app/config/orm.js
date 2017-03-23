@@ -53,7 +53,25 @@ var orm = {
 
         });
 
-	}
+	},
+	EmployeeReports: function(empID, callback){
+		var selectReport = 'SELECT * FROM Reports WHERE EmpID = ? ;';
+
+		connection.query(selectReport,[empID],function(err, result){
+
+			callback(err, result);
+
+		});
+	},
+	InsertReport: function(empID, SoftwareID, callback){
+		var insertReport = 'INSERT INTO Reports VALUES(null,2,4,"test","test","test","unopened","low",current_timestamp, null);';
+
+		connection.query(insertReport, [empID], [SoftwareID], function(err, result){
+
+			callback(err, result);
+			
+		});
+	},
 
 
 };

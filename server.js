@@ -5,7 +5,7 @@
 //
 var http = require('http');
 var path = require('path');
-
+var orm = require('./app/config/orm');
 var async = require('async');
 var socketio = require('socket.io');
 var express = require('express');
@@ -21,6 +21,16 @@ var server = http.createServer(router);
 var io = socketio.listen(server);
 
 router.use(express.static(path.resolve(__dirname, 'client')));
+router.get('/employee/:empID/reports',function(req, res){
+  var empID = req.params['empID'];
+  orm.EmployeeReports(empID, function(err, result){
+      if(err){
+        res.send('error');
+      }else{
+        res.send(result);
+      }
+  });
+})
 var messages = [];
 var sockets = [];
 
