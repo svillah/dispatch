@@ -22,9 +22,9 @@ var source = {
         database: "",   //must fill in once MySQL is set up
     }
 }
+
 console.log(process.env.JAWSDB_MARIA_URL);
 var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
-
 connection.connect(function(err) {
     if (err) {
         console.error('error connecting: ' + err.stack);

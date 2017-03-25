@@ -1,5 +1,5 @@
 (function(){
-  var app = angular.module('tool', [ ]);
+  var app = angular.module('tool', []);
 
   app.controller("PanelController", function(){
     this.tab = 1;
@@ -15,15 +15,26 @@
     this.documents = reports;
   });
 
-  app.controller("CreateReportController", function(){
+  app.controller("CreateReportController", function($http){
     this.dispatcherReport = {};
-
+    this.flash = [];
     this.addReport = function(document){
       this.dispatcherReport.createdOn = Date.now();
-      document.dispatcherReports.push(this.dispatcherReport);
+      
+      console.log(this.dispatcherReport);
+      var report = $http.post('/reports',this.dispatcherReport);
+      report.then(function(res){
+        console.log(res)
+        //flash("Report Created");
+      },function(err){
+        console.log(err);
+      });
+      //empties report
       this.dispatcherReport = {};
       //createForm.setUntouched();  unresolved
     };
+
+
 
   });
 
