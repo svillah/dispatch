@@ -53,7 +53,36 @@ var orm = {
 
         });
 
-	}
+	},
+	EmployeeReports: function(callback){
+		var selectReport = 'SELECT * FROM Reports;';
+
+		connection.query(selectReport,function(err, result){
+
+			callback(err, result);
+
+		});
+	},
+	InsertReport: function(body, callback){
+
+		var SoftID = 'SELECT SoftwareID FROM Software WHERE SoftwareTitle = ?';
+		connection.query(SoftID,[body.software],function(err, result){
+			var insertReport = 'INSERT INTO Reports VALUES(null,?,?,?,?,"","unopened","low",current_timestamp, null);';
+			console.log(result);
+			connection.query(insertReport,[body.employeeID,result[0].SoftwareID,body.issueOverview,body.submissionNotes],function(err,result){
+				console.log(err);
+				callback(err,result);
+			});
+
+		});
+		
+
+		//connection.query(insertReport, [empID], [SoftwareID], function(err, result){
+
+			//callback(err, result);
+
+		//});
+	},
 
 
 };

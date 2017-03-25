@@ -58,6 +58,7 @@
 
             <!-- 2nd tab form -->
             <div class="panel" ng-show="panel.isSelected(2)">
+              <flash:messages></flash:messages>
               <form name="createForm" ng-controller="CreateReportController as createRpt"
                                       ng-submit="createForm.$valid && createRpt.addReport(document)" novalidate>
                 <div class="row">
@@ -74,9 +75,13 @@
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.submissionNotes" class="form-control" placeholder="Submission Notes" title="SubmissionNotes" required></textarea>
                       </fieldset>
                       <fieldset class="form-group">
-                        <select class="span5" ng-model="createRpt.dispatcherReport.software" class="form-control" ng-options="softwares for softwares in ['Google Chrome', 'Sharepoint', 'Microsoft Access']"  title="Software" required>
+                      software options here
+                        <select class="span5" ng-model="createRpt.dispatcherReport.software" class="form-control" ng-options="softwares for softwares in ['DRBN', 'FDM/FOM', 'FDX SharePoint Site', 'LIDO', 'SMART 4 Aviation', 'WSI Fusion', 'Zetron', 'Other']"  title="Software" required>
                           <option value="">Affected Software</option>
-                        </select>
+                        </select> 
+                      </fieldset>
+                      
+                      
                       </fieldset><br>
                       <fieldset class="form-group">
                         <input type="submit" class="btn btn-large btn-inverse span5" value="Submit report" />

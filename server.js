@@ -5,7 +5,7 @@
 //
 var http = require('http');
 var path = require('path');
-
+var orm = require('./app/config/orm');
 var async = require('async');
 var socketio = require('socket.io');
 var express = require('express');
@@ -19,8 +19,31 @@ var express = require('express');
 var router = express();
 var server = http.createServer(router);
 var io = socketio.listen(server);
-
+var bodyParser = require('body-parser');
+router.use(bodyParser.json()); // support json encoded bodies
+router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 router.use(express.static(path.resolve(__dirname, 'client')));
+router.get('/employee/reports',function(req, res){
+  console.log("test");
+  orm.EmployeeReports(function(err, result){
+      if(err){
+        res.send('error');
+      }else{
+        res.send(result);
+      }
+  });
+})
+router.post('/reports',function(req,res){
+  var body = req.body;
+  console.log(body);
+  orm.InsertReport(body, function(err, result){
+      if(err){
+        res.send('error');
+      }else{
+        res.send(result);
+      }
+  });
+})
 var messages = [];
 var sockets = [];
 
