@@ -37,7 +37,30 @@
 
 
   });
+  app.controller("UpdateReportController", function($http){
+    console.log("are you there");
+    this.dispatcherReport = {};
+    console.log(this.dispatcherReport);
+    this.flash = [];
+    this.UpdateReport = function(document){
+      //this.dispatcherReport.createdOn = Date.now();
+      
+      console.log(this.dispatcherReport);
+      var report = $http.put('/reports',this.dispatcherReport);
+      report.then(function(res){
+        console.log(res)
+        //flash("Report Created");
+      },function(err){
+        console.log(err);
+      });
+      //empties report
+      this.dispatcherReport = {};
+      //createForm.setUntouched();  unresolved
+    };
+    console.log(this.UpdateReport);
 
+
+  });
   var reports = [
     {
       dispatcherReports: [
