@@ -108,28 +108,28 @@
             <!--Third tab: update -->
             <div class="panel" ng-show="panel.isSelected(3)">
               <h3>Update a Report</h3><br>
+              <form name="updateForm" ng-controller="UpdateReportController as updateRpt"
+                                      ng-submit="updateForm.$valid && updateRpt.UpdateReport(document)" novalidate>
               <div class="row-fluid">
                 <div class="span4">
                   <div class="form-group">Report ID #:<br>
-                    <input ng-model="createRpt.dispatcherReport.reportID" class="form-control" placeholder="128793" title="Issue" integer required/>
+                    <input ng-model="updateRpt.dispatcherReport.reportID" class="form-control" placeholder="128793" title="Issue" integer required/>
                   </div><br>
-                  <div class="form-group">Employee ID (Responders ONLY):
-                    <input ng-model="createRpt.dispatcherReport.responderID" type="string" class="form-control" placeholder="17SO2R89" title="responderID" required/>
-                  </div><br>
+                  
                   <div class="form-group">
-                    <select ng-model="createRpt.dispatcherReport.status" class="form-control" ng-options="ratings for ratings in ['Unresolved', 'In Progress', 'Resolved']"  title="Status" required>
+                    <select ng-model="updateRpt.dispatcherReport.status" class="form-control" ng-options="ratings for ratings in ['Unresolved', 'In Progress', 'Resolved']"  title="Status" required>
                       <option value="">Status</option>
                     </select>
                   </div><br>
                   <div class="form-group">
-                    <select ng-model="createRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority" required>
+                    <select ng-model="updateRpt.dispatcherReport.priority" class="form-control" ng-options="ratings for ratings in ['Low', 'Medium', 'High']"  title="Priority" required>
                       <option value="">Priority Level</option>
                     </select>
                   </div><br>
                 </div>
                 <div class="span8">
                   <div class="form-group">
-                    <textarea rows="10" ng-model="createRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
+                    <textarea rows="10" ng-model="updateRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
                   </div><br>
                 </div>
               </div>
@@ -137,7 +137,7 @@
                 <input type="submit" class="btn btn-block btn-large btn-inverse span5" value="Update report" />
               </div>
             </div>
-
+            </form>
             <!-- Fourth tab: report list -->
             <div class="panel" ng-show="panel.isSelected(4)">
               <h3>List of Reports</h3><br>
