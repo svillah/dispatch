@@ -83,6 +83,25 @@ var orm = {
 
 		//});
 	},
+	UpdateReport: function(body, callback){
+
+			console.log("sup");
+			var UpdateReport = 'UPDATE Reports SET ResponderNotes = ?, ReportStatus = ?, Priority = ?, DateOpened = current_timestamp WHERE ReportID = ?;';
+			console.log(body);
+			connection.query(UpdateReport,[body.responderNotes,body.status,body.priority,body.reportID],function(err,result){
+				console.log(err);
+				callback(err,result);
+			});
+
+		
+		
+
+		//connection.query(insertReport, [empID], [SoftwareID], function(err, result){
+
+			//callback(err, result);
+
+		//});
+	},	
 
 
 };

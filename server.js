@@ -44,6 +44,17 @@ router.post('/reports',function(req,res){
       }
   });
 })
+router.put('/reports',function(req,res){
+  var body = req.body;
+  console.log(body);
+  orm.UpdateReport(body, function(err, result){
+      if(err){
+        res.send('error');
+      }else{
+        res.send(result);
+      }
+  });
+})
 var messages = [];
 var sockets = [];
 
