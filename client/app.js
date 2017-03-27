@@ -1,7 +1,7 @@
 (function(){
   var app = angular.module('tool', []);
   app.run(function($http){
-    
+
   })
   app.controller("PanelController", function(){
     this.tab = 1;
@@ -23,13 +23,13 @@
       $scope.documents.dispatcherReports = res;
     });
   });
-  
+
   app.controller("CreateReportController", function($scope, $http){
     this.dispatcherReport = {};
     this.flash = [];
     this.addReport = function(document){
       this.dispatcherReport.createdOn = Date.now();
-      
+
       console.log(this.dispatcherReport);
       var report = $http.post('/reports',this.dispatcherReport);
       report.then(function(res){
@@ -38,26 +38,21 @@
         dataPromise.then(function(res){
           $scope.documents.dispatcherReports = res.data;
         });
-        //flash("Report Created");
       },function(err){
         console.log(err);
       });
       //empties report
       this.dispatcherReport = {};
-      //createForm.setUntouched();  unresolved
     };
-
-
-
   });
+  
   app.controller("UpdateReportController", function($scope, $http){
     console.log("are you there");
     this.dispatcherReport = {};
     console.log(this.dispatcherReport);
     this.flash = [];
     this.UpdateReport = function(document){
-      //this.dispatcherReport.createdOn = Date.now();
-      
+
       console.log(this.dispatcherReport);
       var report = $http.put('/reports',this.dispatcherReport);
       report.then(function(res){
@@ -66,19 +61,17 @@
         dataPromise.then(function(res){
           $scope.documents.dispatcherReports = res.data;
         });
-        //flash("Report Created");
       },function(err){
         console.log(err);
       });
       //empties report
       this.dispatcherReport = {};
-      //createForm.setUntouched();  unresolved
     };
     console.log(this.UpdateReport);
 
 
   });
-  
+
   var reports = [
     {
       dispatcherReports: [
