@@ -55,7 +55,7 @@ var orm = {
 
 	},
 	EmployeeReports: function(callback){
-		var selectReport = 'SELECT * FROM Reports;';
+		var selectReport = 'SELECT * FROM Reports LEFT JOIN Software ON Reports.SoftwareID = Software.SoftwareID;';
 
 		connection.query(selectReport,function(err, result){
 

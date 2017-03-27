@@ -24,7 +24,7 @@
         </h2>
       </div>
       <div class="list-group">
-        <div class="list-group-item" ng-repeat="document in tool.documents">
+        <div class="list-group-item" ng-repeat="document in documents">
             <section ng-controller="PanelController as panel" style="padding-top:10px">
               <!-- Tab implementation -->
               <ul class="nav nav-tabs nav-justified">
@@ -141,13 +141,13 @@
             <!-- Fourth tab: report list -->
             <div class="panel" ng-show="panel.isSelected(4)">
               <h3>List of Reports</h3><br>
-              <blockquote ng-repeat="dispatcherReport in document.dispatcherReports">
-                <h4><b>#{{dispatcherReport.reportID}}: {{dispatcherReport.issueOverview}}</b> <em class="pull-right">{{dispatcherReport.status}}</em></h4>
-                {{dispatcherReport.submissionNotes}} <br>
-                Affected Software: {{dispatcherReport.software}} <br>
-                {{dispatcherReport.responderNotes}}
-                Priority: {{dispatcherReport.priority}} <br>
-                <cite>— <i>{{dispatcherReport.employeeID}}</i> on {{dispatcherReport.createdOn | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(3)"">Update</button></cite><br><br>
+              <blockquote ng-repeat="dispatcherReport in documents.dispatcherReports">
+                <h4><b>#{{dispatcherReport.ReportID}}: {{dispatcherReport.SubmissionOVerview}}</b> <em class="pull-right">{{dispatcherReport.ReportStatus}}</em></h4>
+                {{dispatcherReport.SubmissionNotes}} <br>
+                Affected Software: {{dispatcherReport.SoftwareTitle}} <br>
+                {{dispatcherReport.ResponderNotes}}
+                Priority: {{dispatcherReport.Priority}} <br>
+                <cite>— <i>{{dispatcherReport.EmployeeID}}</i> on {{dispatcherReport.DateSubmitted | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(3)"">Update</button></cite><br><br>
               </blockquote>
             </div>
           </section>

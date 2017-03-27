@@ -1,6 +1,8 @@
 (function(){
   var app = angular.module('tool', []);
-
+  app.run(function($http){
+    
+  })
   app.controller("PanelController", function(){
     this.tab = 1;
     this.selectTab = function(setTab) {
@@ -11,11 +13,18 @@
     };
   });
 
-  app.controller("ToolController", function(){
-    this.documents = reports;
+  app.controller("ToolController", function($scope, $http){
+    $scope.documents = reports;
+    var updateTable = $http.get('/employee/reports');
+    var dataPromise = updateTable.then(function(res){
+        return res.data;
+      });
+    dataPromise.then(function(res) {
+      $scope.documents.dispatcherReports = res;
+    });
   });
-
-  app.controller("CreateReportController", function($http){
+  
+  app.controller("CreateReportController", function($scope, $http){
     this.dispatcherReport = {};
     this.flash = [];
     this.addReport = function(document){
@@ -24,7 +33,11 @@
       console.log(this.dispatcherReport);
       var report = $http.post('/reports',this.dispatcherReport);
       report.then(function(res){
-        console.log(res)
+        console.log(res);
+        var dataPromise = $http.get('/employee/reports');
+        dataPromise.then(function(res){
+          $scope.documents.dispatcherReports = res.data;
+        });
         //flash("Report Created");
       },function(err){
         console.log(err);
@@ -37,7 +50,7 @@
 
 
   });
-  app.controller("UpdateReportController", function($http){
+  app.controller("UpdateReportController", function($scope, $http){
     console.log("are you there");
     this.dispatcherReport = {};
     console.log(this.dispatcherReport);
@@ -48,7 +61,11 @@
       console.log(this.dispatcherReport);
       var report = $http.put('/reports',this.dispatcherReport);
       report.then(function(res){
-        console.log(res)
+        console.log(res);
+        var dataPromise = $http.get('/employee/reports');
+        dataPromise.then(function(res){
+          $scope.documents.dispatcherReports = res.data;
+        });
         //flash("Report Created");
       },function(err){
         console.log(err);
@@ -61,6 +78,7 @@
 
 
   });
+  
   var reports = [
     {
       dispatcherReports: [
