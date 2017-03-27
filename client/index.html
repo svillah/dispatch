@@ -44,10 +44,10 @@
 
             <!-- 1st tab: Dashboard -->
             <div class="panel" ng-show="panel.isSelected(1)">
-              <h3>Hello and welcome!</h3>
-              <blockquote>You can either create a report or view one.</blockquote>
+              <h3>Welcome!</h3>
+              <blockquote>This tool should be used to report any software issues within the flight operations department. <br><br>You can either create, update or view a report.</blockquote>
                 <blockquote style="margin-top:20px"><br>
-                <h4><b>Helpful Resources</b></h4>
+                <h4><b>Air Canada Resources</b></h4>
                   <section>
                     <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/onboard/fleet.html"><button class="btn btn-danger" type="button">Fleet List</button></a>
                     <a style="color:#FFF" href="https://www.aircanada.com/ca/en/aco/home/fly/flight-information/daily-travel-outlook.html"><button class="btn btn-danger" type="button">Daily Travel Outlook</button></a>
@@ -70,18 +70,14 @@
                       </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.issueOverview" class="form-control" placeholder="Issue Overview" title="Issue" required></textarea>
-                      </fieldset>
+                      </fieldset><br>
                       <fieldset class="form-group">
                         <textarea class="span5" ng-model="createRpt.dispatcherReport.submissionNotes" class="form-control" placeholder="Submission Notes" title="SubmissionNotes" required></textarea>
-                      </fieldset>
+                      </fieldset><br>
                       <fieldset class="form-group">
-                      software options here
                         <select class="span5" ng-model="createRpt.dispatcherReport.software" class="form-control" ng-options="softwares for softwares in ['DRBN', 'FDM/FOM', 'FDX SharePoint Site', 'LIDO', 'SMART 4 Aviation', 'WSI Fusion', 'Zetron', 'Other']"  title="Software" required>
                           <option value="">Affected Software</option>
-                        </select> 
-                      </fieldset>
-                      
-                      
+                        </select>
                       </fieldset><br>
                       <fieldset class="form-group">
                         <input type="submit" class="btn btn-large btn-inverse span5" value="Submit report" />
@@ -115,7 +111,7 @@
                   <div class="form-group">Report ID #:<br>
                     <input ng-model="updateRpt.dispatcherReport.reportID" class="form-control" placeholder="128793" title="Issue" integer required/>
                   </div><br>
-                  
+
                   <div class="form-group">
                     <select ng-model="updateRpt.dispatcherReport.status" class="form-control" ng-options="ratings for ratings in ['Unresolved', 'In Progress', 'Resolved']"  title="Status" required>
                       <option value="">Status</option>
@@ -129,7 +125,7 @@
                 </div>
                 <div class="span8">
                   <div class="form-group">
-                    <textarea rows="10" ng-model="updateRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
+                    <textarea rows="8" ng-model="updateRpt.dispatcherReport.responderNotes" class="form-control" placeholder="Responder Notes" title="ResponderNotes"></textarea>
                   </div><br>
                 </div>
               </div>
@@ -138,16 +134,18 @@
               </div>
             </div>
             </form>
+
             <!-- Fourth tab: report list -->
             <div class="panel" ng-show="panel.isSelected(4)">
               <h3>List of Reports</h3><br>
               <blockquote ng-repeat="dispatcherReport in documents.dispatcherReports">
                 <h4><b>#{{dispatcherReport.ReportID}}: {{dispatcherReport.SubmissionOVerview}}</b> <em class="pull-right">{{dispatcherReport.ReportStatus}}</em></h4>
-                {{dispatcherReport.SubmissionNotes}} <br>
+                Dispatcher Notes: {{dispatcherReport.SubmissionNotes}} <br>
                 Affected Software: {{dispatcherReport.SoftwareTitle}} <br>
-                {{dispatcherReport.ResponderNotes}}
+                Responder Notes: {{dispatcherReport.ResponderNotes}} <br>
                 Priority: {{dispatcherReport.Priority}} <br>
-                <cite>— <i>{{dispatcherReport.EmployeeID}}</i> on {{dispatcherReport.DateSubmitted | date}} <br><br><button class="btn btn-inverse" ng-click="panel.selectTab(3)"">Update</button></cite><br><br>
+                <cite>— <i>{{dispatcherReport.EmployeeID}}</i> on {{dispatcherReport.DateSubmitted | date}} <br><br>
+                <button class="btn btn-inverse" ng-click="panel.selectTab(3)">Update #{{dispatcherReport.ReportID}}</button></cite><br><br>
               </blockquote>
             </div>
           </section>
